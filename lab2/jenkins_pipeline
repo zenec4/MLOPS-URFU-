@@ -1,0 +1,103 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('git') {
+            steps {
+                script {
+                    try {
+                        git branch: 'main', url: 'https://github.com/zenec4/MLOPS-URFU-'
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error "Ошибка при выполнении git: ${e.message}"
+                    }
+                }
+            }
+        }
+        stage('create_venv') {
+            steps {
+                dir('lab1') {
+                    script {
+                        try {
+                            sh 'python3 -m venv myenv'
+                        } catch (Exception e) {
+                            currentBuild.result = 'FAILURE'
+                            error "Ошибка при создании виртуальной среды: ${e.message}"
+                        }
+                    }
+                }
+            }
+        }
+        stage('install_requirements') {
+            steps {
+                dir('lab1') {
+                    script {
+                        try {
+                            sh 'source myenv/bin/activate && pip install -r requirements.txt && deactivate'
+                        } catch (Exception e) {
+                            currentBuild.result = 'FAILURE'
+                            error "Ошибка при установке зависимостей: ${e.message}"
+                        }
+                    }
+                }
+            }
+        }
+        stage('data_creation') {
+            steps {
+                dir('lab1') {
+                    script {
+                        try {
+                            sh 'source myenv/bin/activate && python data_creation.py && deactivate'
+                        } catch (Exception e) {
+                            currentBuild.result = 'FAILURE'
+                            error "Ошибка при выполнении data_creation.py: ${e.message}"
+                        }
+                    }
+                }
+            }
+        }
+        stage('model_preprocessing') {
+            steps {
+                dir('lab1') {
+                    script {
+                        try {
+                            sh 'source myenv/bin/activate && python model_preprocessing.py && deactivate'
+                        } catch (Exception e) {
+                            currentBuild.result = 'FAILURE'
+                            error "Ошибка при выполнении model_preprocessing.py: ${e.message}"
+                        }
+                    }
+                }
+            }
+        }
+        stage('model_preparation') {
+            steps {
+                dir('lab1') {
+                    script {
+                        try {
+                            sh 'source myenv/bin/activate && python model_preparation.py && deactivate'
+                        } catch (Exception e) {
+                            currentBuild.result = 'FAILURE'
+                            error "Ошибка при выполнении model_preparation.py: ${e.message}"
+                        }
+                    }
+                }
+            }
+        }
+        stage('model_testing') {
+            steps {
+                dir('lab1') {
+                    script {
+                        try {
+                            sh 'source myenv/bin/activate && python model_testing.py && deactivate'
+                        } catch (Exception e) {
+                            currentBuild.result = 'FAILURE'
+                            error "Ошибка при выполнении model_testing.py: ${e.message}"
+                        }
+                    }
+                }
+                echo "Все скрипты были выполнены"
+            }
+        }
+    }
+}
