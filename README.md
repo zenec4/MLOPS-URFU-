@@ -71,7 +71,7 @@ chmod +x pipeline.sh
 ### Использование
 <details>
   
-# Для запуска Docker в терминал пишем следующие команды:
+### Для запуска Docker в терминал пишем следующие команды:
   
   1. docker build -t app:latest -f Dockerfile .
   
