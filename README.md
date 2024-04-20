@@ -81,4 +81,8 @@ chmod +x pipeline.sh
 
 Вторая команда запускает Docker.
 
+### Для запуска Docker-compose в терминал пишем следующюю команду:
+
+docker-compose up
+
 </details>
