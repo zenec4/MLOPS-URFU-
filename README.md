@@ -114,7 +114,6 @@ docker-compose up
 В постановке задачи используется датасет из конкурса “Titanic Disaster”, однако вы можете использовать свои наборы данных, в этом случае в п.п.4-8 необходимо использовать информацию и признаки из вашего датасета.
 ### Использование
 <details>
-  Все данные лежат по ссылке на Google Диске: https://drive.google.com/drive/folders/1LGhEVqauudsIx8l40q5z6lPCHBkXxTkH
   Команды которые вводились в Terminal:
   
   pip install dvc
@@ -122,4 +121,37 @@ docker-compose up
   В репозитории пишем команду git init и dvc init
   
   mkdir lab4
+
+  git commit -am "init dvc"
+
+  ### Далее, был создан датасет с помощью скрипта "dataset1.py", он находится в папке lab4 в данном репозитории
+
+  dvc add lab4/
+
+  git add .gitignore lab4.dvc
+
+  dvc config core.autostage true
+
+  git commit -m "add new titanic.csv"
+
+  ### Далее было настроено удалённое хранилище Google Диск: https://drive.google.com/drive/folders/1e1gM-Jvv_zDv2l5lx9vhJCuwUS_-jduB
+
+  dvc remote add --default myremote gdrive://1e1gM-Jvv_zDv2l5lx9vhJCuwUS_-jduB
+
+  dvc remote modify myremote gdrive_acknowledge_abuse true  
+
+  git add .dvc/config
+
+  git commit -m "Google drive storage added for remote"
+
+  dvc push - после выполнения этой команды, была произведена авторизация на Google Диске
+
+  dvc push -r myremote
+
+  ### Далее, был изменён датасет с помощью скрипта "dataset2.py", он находится в папке lab4 в данном репозитории (В данном скрипте был сразу модифицирован датасет и пропущенные значения nan были заменены на среднее значение, т.е. задание 7 и 8 было объединено)
+
+  dvc add lab4
+
+  dvc push -r myremote
+
 </details>
