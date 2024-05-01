@@ -116,6 +116,7 @@ docker-compose up
 <details>
   Все данные лежат по ссылке на Google Диске: https://drive.google.com/drive/folders/1LGhEVqauudsIx8l40q5z6lPCHBkXxTkH
   Команды которые вводились в Terminal:
+  
   pip install dvc
   
   В репозитории пишем команду git init и dvc init
