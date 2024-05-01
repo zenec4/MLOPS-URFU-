@@ -154,5 +154,9 @@ docker-compose up
   dvc add lab4
 
   dvc push -r myremote
+  ### Команды которые были использованы для перемещения между созданными версиями датасета:
 
+  rm -rf lab4
+
+  dvc pull -r myremote
 </details>
