@@ -86,6 +86,7 @@ docker run app:latest -p 8501:8501
 docker-compose up
 
 </details>
+</details>
 
 ### Module 4
 <details>
