@@ -115,6 +115,7 @@ docker-compose up
 ### Использование
 <details>
   Команды которые вводились в Terminal:
+
   
   pip install dvc
   
