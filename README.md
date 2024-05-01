@@ -114,5 +114,11 @@ docker-compose up
 В постановке задачи используется датасет из конкурса “Titanic Disaster”, однако вы можете использовать свои наборы данных, в этом случае в п.п.4-8 необходимо использовать информацию и признаки из вашего датасета.
 ### Использование
 <details>
+  Все данные лежат по ссылке на Google Диске: https://drive.google.com/drive/folders/1LGhEVqauudsIx8l40q5z6lPCHBkXxTkH
+  Команды которые вводились в Terminal:
+  pip install dvc
   
+  В репозитории пишем команду git init и dvc init
+  
+  mkdir lab4
 </details>
