@@ -1,0 +1,22 @@
+import pandas as pd
+
+# Загрузка датасета из файла
+titanic_df = pd.read_csv('titanic.csv')
+
+# Вычисление среднего значения возраста
+mean_age = titanic_df['Age'].mean()
+
+# Замена пропущенных значений в поле "Age" на среднее значение
+titanic_df['Age'].fillna(mean_age, inplace=True)
+
+# Создание нового признака с one-hot-encoding для столбца "Sex"
+sex_encoded = pd.get_dummies(titanic_df['Sex'], prefix='Sex')
+
+# Добавление нового признака в датасет
+titanic_df = pd.concat([titanic_df, sex_encoded], axis=1)
+
+# Сохранение модифицированного датасета в новый CSV файл
+titanic_df.to_csv('titanic.csv', index=False)
+
+# Вывод первых нескольких строк модифицированного датасета для проверки
+print(titanic_df.head())
